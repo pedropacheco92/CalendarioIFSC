@@ -2,6 +2,8 @@ package calendario_ifsc.view.impl;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.util.HashMap;
 
@@ -12,12 +14,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import calendario_ifsc.presenter.LoginPresenter;
+import calendario_ifsc.model.NovoCadastroModel;
+import calendario_ifsc.model.impl.NovoCadastroModelImpl;
+import calendario_ifsc.presenter.NovoCadastroPresenter;
+import calendario_ifsc.presenter.impl.NovoCadastroPresenterImpl;
 import calendario_ifsc.view.LoginView;
+import calendario_ifsc.view.NovoCadastroView;
 
-public class LoginViewImpl implements LoginView {
+public class LoginViewImpl<PRESENTER> implements LoginView {
 
-	private LoginPresenter presenter;
+	private PRESENTER presenter;
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -26,8 +32,8 @@ public class LoginViewImpl implements LoginView {
 	private JButton btnNovoCadastro;
 
 	@Override
-	public void setPresenter(LoginPresenter loginPresenter) {
-		this.presenter = loginPresenter;
+	public void setPresenter(Object loginPresenter) {
+		this.presenter = (PRESENTER) loginPresenter;
 	}
 
 	/**
@@ -87,6 +93,12 @@ public class LoginViewImpl implements LoginView {
 		this.frame.getContentPane().add(this.btnRecuperarSenha);
 
 		this.btnNovoCadastro = new JButton("Novo Cadastro");
+		this.btnNovoCadastro.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				LoginViewImpl.this.createNovoCadastro();
+			}
+		});
 		this.btnNovoCadastro.setHorizontalTextPosition(SwingConstants.LEFT);
 		this.btnNovoCadastro.setHorizontalAlignment(SwingConstants.LEFT);
 		this.btnNovoCadastro.setForeground(Color.BLUE);
@@ -97,6 +109,15 @@ public class LoginViewImpl implements LoginView {
 		this.frame.getContentPane().add(this.btnNovoCadastro);
 
 		this.frame.setBounds(100, 100, 450, 300);
+	}
+
+	protected void createNovoCadastro() {
+		// this.frame.dispose();
+		NovoCadastroModel cadastroModel = new NovoCadastroModelImpl();
+		NovoCadastroView cadastroView = new NovoCadastroViewImpl();
+		NovoCadastroPresenter cadastroPresenter = new NovoCadastroPresenterImpl(cadastroModel, cadastroView);
+		cadastroView.setPresenter(cadastroPresenter);
+		cadastroView.render();
 
 	}
 }

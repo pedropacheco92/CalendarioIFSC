@@ -1,11 +1,9 @@
 package calendario_ifsc.view;
 
-import calendario_ifsc.presenter.LoginPresenter;
-
-public interface LoginView {
-
-	void setPresenter(LoginPresenter loginPresenter);
+public interface LoginView<PRESENTER> {
 
 	void render();
+
+	void setPresenter(Object loginPresenter);
 
 }
