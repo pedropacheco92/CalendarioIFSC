@@ -15,7 +15,6 @@ public class Main {
 		LoginPresenter loginPresenter = new LoginPresenterImpl(loginModel, loginView);
 		loginView.setPresenter(loginPresenter);
 		loginView.render();
-
 	}
 
 }
