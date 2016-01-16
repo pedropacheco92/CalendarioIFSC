@@ -1,6 +1,5 @@
 package calendario_ifsc.view.impl;
 
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +29,7 @@ public class NovoCadastroViewImpl implements NovoCadastroView {
 	private JPasswordField passwordFieldConfirma;
 	private JTextField textFieldMatricula;
 
-	HashMap<NovoCadastroConstants, Component> listaCampos;
+	HashMap<NovoCadastroConstants, JTextField> listaCampos;
 
 	public NovoCadastroViewImpl() {
 		this.listaCampos = new HashMap<>();

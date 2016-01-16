@@ -1,21 +1,25 @@
 package calendario_ifsc.form;
 
-import java.awt.Component;
 import java.util.HashMap;
 
+import javax.swing.JTextField;
+
 import calendario_ifsc.constants.NovoCadastroConstants;
+import calendario_ifsc.exceptions.CampoVazioException;
 
-public class NovoCadastroFormValidator extends FormValidator {
+public class NovoCadastroFormValidator<T> extends FormValidator {
 
-	public NovoCadastroFormValidator(HashMap<NovoCadastroConstants, Component> listaform) {
+	public NovoCadastroFormValidator(HashMap<NovoCadastroConstants, JTextField> listaform) {
 		super(listaform);
 	}
 
 	@Override
-	public void validateForm() {
-		for (Object key : this.listaForm.keySet()) {
-
+	public void validateItem(Object k) throws CampoVazioException {
+		JTextField aux = (JTextField) super.listaForm.get(k);
+		if (aux.getText().equals("")) {
+			throw new CampoVazioException();
 		}
+
 	}
 
 }
