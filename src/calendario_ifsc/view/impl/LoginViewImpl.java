@@ -14,16 +14,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import calendario_ifsc.model.NovoCadastroModel;
-import calendario_ifsc.model.impl.NovoCadastroModelImpl;
-import calendario_ifsc.presenter.NovoCadastroPresenter;
-import calendario_ifsc.presenter.impl.NovoCadastroPresenterImpl;
+import calendario_ifsc.presenter.LoginPresenter;
 import calendario_ifsc.view.LoginView;
-import calendario_ifsc.view.NovoCadastroView;
 
-public class LoginViewImpl<PRESENTER> implements LoginView {
+public class LoginViewImpl<PRESENTER> implements LoginView<PRESENTER> {
 
-	private PRESENTER presenter;
+	private LoginPresenter presenter;
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -32,8 +28,8 @@ public class LoginViewImpl<PRESENTER> implements LoginView {
 	private JButton btnNovoCadastro;
 
 	@Override
-	public void setPresenter(Object loginPresenter) {
-		this.presenter = (PRESENTER) loginPresenter;
+	public void setPresenter(PRESENTER loginPresenter) {
+		this.presenter = (LoginPresenter) loginPresenter;
 	}
 
 	/**
@@ -76,6 +72,12 @@ public class LoginViewImpl<PRESENTER> implements LoginView {
 		this.btnLogin.setBackground(new Color(51, 204, 102));
 		this.btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		this.btnLogin.setBounds(274, 146, 115, 33);
+		this.btnLogin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				LoginViewImpl.this.fazerLoginUsuario();
+			}
+		});
 		this.frame.getContentPane().add(this.btnLogin);
 
 		this.btnRecuperarSenha = new JButton("Recuperar Senha");
@@ -111,13 +113,20 @@ public class LoginViewImpl<PRESENTER> implements LoginView {
 		this.frame.setBounds(100, 100, 450, 300);
 	}
 
-	protected void createNovoCadastro() {
-		// this.frame.dispose();
-		NovoCadastroModel cadastroModel = new NovoCadastroModelImpl();
-		NovoCadastroView cadastroView = new NovoCadastroViewImpl();
-		NovoCadastroPresenter cadastroPresenter = new NovoCadastroPresenterImpl(cadastroModel, cadastroView);
-		cadastroView.setPresenter(cadastroPresenter);
-		cadastroView.render();
+	protected void fazerLoginUsuario() {
+		this.frame.dispose();
+		try {
+			this.presenter.validateLogin(this.textField.getText().trim(),
+					this.passwordField.getPassword().toString().trim());
+		} catch (Exception e) {
 
+		}
+
+		this.presenter.createMainScreen();
+	}
+
+	protected void createNovoCadastro() {
+		this.frame.dispose();
+		this.presenter.createNovoCadastro();
 	}
 }
