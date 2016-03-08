@@ -1,4 +1,4 @@
-package calendario_ifsc.view.impl;
+package calendario_ifsc.novo_cadastro;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,8 +14,6 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import calendario_ifsc.constants.NovoCadastroConstants;
-import calendario_ifsc.presenter.NovoCadastroPresenter;
-import calendario_ifsc.view.NovoCadastroView;
 
 public class NovoCadastroViewImpl implements NovoCadastroView {
 
@@ -150,6 +148,7 @@ public class NovoCadastroViewImpl implements NovoCadastroView {
 		btnVoltar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				NovoCadastroViewImpl.this.frame.dispose();
 			}
 		});
 		btnVoltar.setBounds(73, 370, 120, 40);

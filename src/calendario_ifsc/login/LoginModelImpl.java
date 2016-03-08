@@ -1,11 +1,10 @@
-package calendario_ifsc.model.impl;
+package calendario_ifsc.login;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import calendario_ifsc.bd.DataBaseConnection;
-import calendario_ifsc.model.LoginModel;
 
 public class LoginModelImpl implements LoginModel {
 

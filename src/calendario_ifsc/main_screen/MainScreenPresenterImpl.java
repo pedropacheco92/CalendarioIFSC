@@ -1,8 +1,4 @@
-package calendario_ifsc.presenter.impl;
-
-import calendario_ifsc.model.MainScreenModel;
-import calendario_ifsc.presenter.MainScreenPresenter;
-import calendario_ifsc.view.MainScreenView;
+package calendario_ifsc.main_screen;
 
 public class MainScreenPresenterImpl implements MainScreenPresenter {
 

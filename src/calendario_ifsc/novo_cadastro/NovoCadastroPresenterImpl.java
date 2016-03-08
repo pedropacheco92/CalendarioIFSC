@@ -1,13 +1,10 @@
-package calendario_ifsc.presenter.impl;
+package calendario_ifsc.novo_cadastro;
 
 import java.awt.Component;
 import java.util.HashMap;
 
 import calendario_ifsc.constants.NovoCadastroConstants;
 import calendario_ifsc.form.NovoCadastroFormValidator;
-import calendario_ifsc.model.NovoCadastroModel;
-import calendario_ifsc.presenter.NovoCadastroPresenter;
-import calendario_ifsc.view.NovoCadastroView;
 
 public class NovoCadastroPresenterImpl implements NovoCadastroPresenter {
 

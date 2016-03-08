@@ -1,4 +1,4 @@
-package calendario_ifsc.model;
+package calendario_ifsc.novo_cadastro;
 
 public interface NovoCadastroModel {
 

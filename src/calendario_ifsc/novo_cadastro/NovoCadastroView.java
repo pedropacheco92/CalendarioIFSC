@@ -1,8 +1,6 @@
-package calendario_ifsc.view;
+package calendario_ifsc.novo_cadastro;
 
 import java.util.HashMap;
-
-import calendario_ifsc.presenter.NovoCadastroPresenter;
 
 public interface NovoCadastroView {
 

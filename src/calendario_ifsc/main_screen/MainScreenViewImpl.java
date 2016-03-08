@@ -1,9 +1,6 @@
-package calendario_ifsc.view.impl;
+package calendario_ifsc.main_screen;
 
 import javax.swing.JFrame;
-
-import calendario_ifsc.presenter.MainScreenPresenter;
-import calendario_ifsc.view.MainScreenView;
 
 public class MainScreenViewImpl implements MainScreenView {
 

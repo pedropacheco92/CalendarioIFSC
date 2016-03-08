@@ -1,4 +1,4 @@
-package calendario_ifsc.presenter;
+package calendario_ifsc.login;
 
 public interface LoginPresenter<VIEW, MODEL> {
 

@@ -1,18 +1,17 @@
-package calendario_ifsc.presenter.impl;
+package calendario_ifsc.login;
 
-import calendario_ifsc.model.LoginModel;
-import calendario_ifsc.model.MainScreenModel;
-import calendario_ifsc.model.NovoCadastroModel;
-import calendario_ifsc.model.impl.MainScreenModelImpl;
-import calendario_ifsc.model.impl.NovoCadastroModelImpl;
-import calendario_ifsc.presenter.LoginPresenter;
-import calendario_ifsc.presenter.MainScreenPresenter;
-import calendario_ifsc.presenter.NovoCadastroPresenter;
-import calendario_ifsc.view.LoginView;
-import calendario_ifsc.view.MainScreenView;
-import calendario_ifsc.view.NovoCadastroView;
-import calendario_ifsc.view.impl.MainScreenViewImpl;
-import calendario_ifsc.view.impl.NovoCadastroViewImpl;
+import calendario_ifsc.main_screen.MainScreenModel;
+import calendario_ifsc.main_screen.MainScreenModelImpl;
+import calendario_ifsc.main_screen.MainScreenPresenter;
+import calendario_ifsc.main_screen.MainScreenPresenterImpl;
+import calendario_ifsc.main_screen.MainScreenView;
+import calendario_ifsc.main_screen.MainScreenViewImpl;
+import calendario_ifsc.novo_cadastro.NovoCadastroModel;
+import calendario_ifsc.novo_cadastro.NovoCadastroModelImpl;
+import calendario_ifsc.novo_cadastro.NovoCadastroPresenter;
+import calendario_ifsc.novo_cadastro.NovoCadastroPresenterImpl;
+import calendario_ifsc.novo_cadastro.NovoCadastroView;
+import calendario_ifsc.novo_cadastro.NovoCadastroViewImpl;
 
 public class LoginPresenterImpl<MODEL, VIEW> implements LoginPresenter<VIEW, MODEL> {
 

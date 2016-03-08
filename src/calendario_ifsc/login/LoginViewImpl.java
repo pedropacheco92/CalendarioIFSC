@@ -1,4 +1,4 @@
-package calendario_ifsc.view.impl;
+package calendario_ifsc.login;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,9 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import calendario_ifsc.presenter.LoginPresenter;
-import calendario_ifsc.view.LoginView;
 
 public class LoginViewImpl<PRESENTER> implements LoginView<PRESENTER> {
 
@@ -126,7 +123,6 @@ public class LoginViewImpl<PRESENTER> implements LoginView<PRESENTER> {
 	}
 
 	protected void createNovoCadastro() {
-		this.frame.dispose();
 		this.presenter.createNovoCadastro();
 	}
 }

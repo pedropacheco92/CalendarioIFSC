@@ -1,11 +1,11 @@
 package calendario_ifsc.main;
 
-import calendario_ifsc.model.LoginModel;
-import calendario_ifsc.model.impl.LoginModelImpl;
-import calendario_ifsc.presenter.LoginPresenter;
-import calendario_ifsc.presenter.impl.LoginPresenterImpl;
-import calendario_ifsc.view.LoginView;
-import calendario_ifsc.view.impl.LoginViewImpl;
+import calendario_ifsc.login.LoginModel;
+import calendario_ifsc.login.LoginModelImpl;
+import calendario_ifsc.login.LoginPresenter;
+import calendario_ifsc.login.LoginPresenterImpl;
+import calendario_ifsc.login.LoginView;
+import calendario_ifsc.login.LoginViewImpl;
 
 public class Main {
 

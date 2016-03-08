@@ -1,6 +1,4 @@
-package calendario_ifsc.view;
-
-import calendario_ifsc.presenter.MainScreenPresenter;
+package calendario_ifsc.main_screen;
 
 public interface MainScreenView {
 
