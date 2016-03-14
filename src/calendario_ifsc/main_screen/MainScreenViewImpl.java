@@ -2,17 +2,22 @@ package calendario_ifsc.main_screen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MainScreenViewImpl implements MainScreenView {
 
 	private JFrame frame;
 	private JTable table;
 	private MainScreenPresenter presenter;
+	private DefaultTableModel dtm;
+	private Map<String, ArrayList<String>> eventos;
 
 	@Override
 	public void setPresenter(MainScreenPresenter cadastroPresenter) {
@@ -33,9 +38,13 @@ public class MainScreenViewImpl implements MainScreenView {
 		this.frame.getContentPane().add(scrollPane);
 
 		this.table = new JTable();
+		this.table.setEnabled(false);
 		scrollPane.setViewportView(this.table);
-		this.table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {},
-				new String[] { "Data", "Nome", "Local", "Descrição" }));
+		this.table.setModel(
+				new DefaultTableModel(new Object[][] {}, new String[] { "Data", "Nome", "Local", "Descrição" }));
+
+		this.dtm = (javax.swing.table.DefaultTableModel) this.table.getModel();
+		this.loadEventos();
 
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
@@ -61,5 +70,12 @@ public class MainScreenViewImpl implements MainScreenView {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.frame.setBounds(100, 100, 450, 461);
+	}
+
+	private void loadEventos() {
+		this.dtm.addRow(new Object[] { "01/02/1992", "Pedro", "pqp", "nao sei" });
+
+		this.eventos = this.presenter.loadEventos();
+
 	}
 }

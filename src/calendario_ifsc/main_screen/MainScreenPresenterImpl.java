@@ -1,5 +1,8 @@
 package calendario_ifsc.main_screen;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import calendario_ifsc.novo_evento.NovoEventoModel;
 import calendario_ifsc.novo_evento.NovoEventoModelImpl;
 import calendario_ifsc.novo_evento.NovoEventoPresenter;
@@ -24,6 +27,12 @@ public class MainScreenPresenterImpl implements MainScreenPresenter {
 		NovoEventoPresenter novoEventoPresenter = new NovoEventoPresenterImpl(novoEventoModel, novoEventoView);
 		novoEventoView.setPresenter(novoEventoPresenter);
 		novoEventoView.render();
+	}
+
+	@Override
+	public Map<String, ArrayList<String>> loadEventos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
