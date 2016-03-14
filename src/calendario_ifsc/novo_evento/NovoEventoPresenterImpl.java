@@ -14,7 +14,9 @@ public class NovoEventoPresenterImpl implements NovoEventoPresenter {
 
 	@Override
 	public void salvarEvento(Date date, String nome, String local, String descricao) {
-		// TODO Auto-generated method stub
+		if (date == null || nome == null || local == null || descricao == null || nome == "" || local == "" || descricao == "") {
+		
+		}
 
 	}
 
