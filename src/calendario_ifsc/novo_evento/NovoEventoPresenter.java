@@ -4,6 +4,8 @@ import java.util.Date;
 
 public interface NovoEventoPresenter {
 
-	void salvarEvento(Date date, String nome, String local, String descricao);
+	void salvarEvento(Date inicio, Date fim, String nome, String descricao);
+
+	void setCpf(String cpf);
 
 }

@@ -24,20 +24,17 @@ public class LoginPresenterImpl<MODEL, VIEW> implements LoginPresenter<VIEW, MOD
 	}
 
 	@Override
-	public void validateLogin(String login, String senha) {
-		try {
-			this.model.loadUsuario(login, senha);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void validateLogin(String login, String senha) throws Exception {
+		this.model.loadUsuario(login, senha);
 	}
 
 	@Override
-	public void createMainScreen() {
+	public void createMainScreen(String cpf) {
 		MainScreenModel mainScreenModel = new MainScreenModelImpl();
 		MainScreenView mainScreenView = new MainScreenViewImpl();
-		MainScreenPresenter cadastroPresenter = new MainScreenPresenterImpl(mainScreenModel, mainScreenView);
-		mainScreenView.setPresenter(cadastroPresenter);
+		MainScreenPresenter mainScreenPresenter = new MainScreenPresenterImpl(mainScreenModel, mainScreenView);
+		mainScreenView.setPresenter(mainScreenPresenter);
+		mainScreenPresenter.setCpf(cpf);
 		mainScreenView.render();
 	}
 

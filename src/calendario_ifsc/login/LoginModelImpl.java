@@ -7,6 +7,9 @@ import java.sql.Statement;
 import org.mindrot.BCrypt;
 
 import calendario_ifsc.bd.DataBaseConnection;
+import calendario_ifsc.exceptions.CampoVazioException;
+import calendario_ifsc.exceptions.SenhaIncorretaException;
+import calendario_ifsc.exceptions.UsuarioNotFoundException;
 
 public class LoginModelImpl implements LoginModel {
 
@@ -22,7 +25,7 @@ public class LoginModelImpl implements LoginModel {
 
 	@Override
 	public void loadUsuario(String login, String senha) throws Exception {
-		if (login == null || login == "" || senha == null || senha == ""){
+		if (login == null || login == "" || senha == null || senha == "") {
 			throw new CampoVazioException();
 		}
 		this.conn = this.db.getConnection();
@@ -32,22 +35,20 @@ public class LoginModelImpl implements LoginModel {
 		System.out.println(this.query);
 		ResultSet rs = st.executeQuery(this.query);
 		boolean senhaOk = false;
-		
+
 		if (!rs.next()) {
 			rs.close();
 			st.close();
-		//	throw new UsuarioNotFoundException();
+			throw new UsuarioNotFoundException();
 		} else {
-			while (rs.next()) {
-				senhaOk = this.checkPassword(senha, rs.getString(4));
-			}
+			senhaOk = this.checkPassword(senha, rs.getString(4));
 		}
 		rs.close();
 		st.close();
 
 		if (!senhaOk) {
-		//	throw new SenhaIncorretaException();
-		} 
+			throw new SenhaIncorretaException();
+		}
 	}
 
 	private String hashPassword(String password_plaintext) {

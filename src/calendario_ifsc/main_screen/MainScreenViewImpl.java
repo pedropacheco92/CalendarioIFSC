@@ -2,8 +2,9 @@ package calendario_ifsc.main_screen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,17 +12,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import calendario_ifsc.utils.Evento;
+
 public class MainScreenViewImpl implements MainScreenView {
 
 	private JFrame frame;
 	private JTable table;
 	private MainScreenPresenter presenter;
 	private DefaultTableModel dtm;
-	private Map<String, ArrayList<String>> eventos;
+	private List<Evento> eventos;
 
 	@Override
 	public void setPresenter(MainScreenPresenter cadastroPresenter) {
-		this.presenter = this.presenter;
+		this.presenter = cadastroPresenter;
 	}
 
 	/**
@@ -40,8 +43,8 @@ public class MainScreenViewImpl implements MainScreenView {
 		this.table = new JTable();
 		this.table.setEnabled(false);
 		scrollPane.setViewportView(this.table);
-		this.table.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "Data", "Nome", "Local", "Descrição" }));
+		this.table.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "Nome", "Data Inicio", "Data Fim", "Descrição" }));
 
 		this.dtm = (javax.swing.table.DefaultTableModel) this.table.getModel();
 		this.loadEventos();
@@ -73,9 +76,16 @@ public class MainScreenViewImpl implements MainScreenView {
 	}
 
 	private void loadEventos() {
-		this.dtm.addRow(new Object[] { "01/02/1992", "Pedro", "pqp", "nao sei" });
-
 		this.eventos = this.presenter.loadEventos();
-
+		this.renderEventos();
 	}
+
+	private void renderEventos() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		for (Evento e : this.eventos) {
+			this.dtm.addRow(new Object[] { e.getNome(), df.format(e.getDateInicio()), df.format(e.getDateFim()),
+					e.getDescricao() });
+		}
+	}
+
 }

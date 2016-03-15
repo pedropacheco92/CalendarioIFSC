@@ -10,6 +10,7 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -111,12 +112,17 @@ public class LoginViewImpl<PRESENTER> implements LoginView<PRESENTER> {
 	}
 
 	protected void fazerLoginUsuario() {
-		this.frame.dispose();
+		boolean aux = true;
 		try {
 			this.presenter.validateLogin(this.textField.getText().trim(), new String(this.passwordField.getPassword()));
-			this.presenter.createMainScreen();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this.frame, e.getMessage();
+			aux = false;
+			JOptionPane.showMessageDialog(this.frame, e.getMessage());
+		}
+
+		if (aux) {
+			this.frame.dispose();
+			this.presenter.createMainScreen(this.textField.getText().trim());
 		}
 	}
 
