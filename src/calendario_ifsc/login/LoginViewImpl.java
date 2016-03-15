@@ -114,11 +114,10 @@ public class LoginViewImpl<PRESENTER> implements LoginView<PRESENTER> {
 		this.frame.dispose();
 		try {
 			this.presenter.validateLogin(this.textField.getText().trim(), new String(this.passwordField.getPassword()));
+			this.presenter.createMainScreen();
 		} catch (Exception e) {
-
+			JOptionPane.showMessageDialog(this.frame, e.getMessage();
 		}
-
-		this.presenter.createMainScreen();
 	}
 
 	protected void createNovoCadastro() {
