@@ -11,4 +11,6 @@ public interface MainScreenPresenter {
 	List<Evento> loadEventos();
 
 	void setCpf(String cpf);
+
+	void deletar(int deletar);
 }

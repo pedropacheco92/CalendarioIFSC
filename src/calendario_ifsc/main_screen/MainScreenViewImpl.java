@@ -41,24 +41,12 @@ public class MainScreenViewImpl implements MainScreenView {
 		this.frame.getContentPane().add(scrollPane);
 
 		this.table = new JTable();
-		this.table.setEnabled(false);
 		scrollPane.setViewportView(this.table);
 		this.table.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "Nome", "Data Inicio", "Data Fim", "Descrição" }));
 
 		this.dtm = (javax.swing.table.DefaultTableModel) this.table.getModel();
 		this.loadEventos();
-
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				MainScreenViewImpl.this.frame.dispose();
-				System.exit(0);
-			}
-		});
-		btnSair.setBounds(74, 388, 105, 23);
-		this.frame.getContentPane().add(btnSair);
 
 		JButton btnNovoEvento = new JButton("Novo Evento");
 		btnNovoEvento.addActionListener(new ActionListener() {
@@ -67,12 +55,38 @@ public class MainScreenViewImpl implements MainScreenView {
 				MainScreenViewImpl.this.presenter.createNovoEvento();
 			}
 		});
-		btnNovoEvento.setBounds(253, 388, 105, 23);
+		btnNovoEvento.setBounds(297, 386, 105, 23);
 		this.frame.getContentPane().add(btnNovoEvento);
+
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainScreenViewImpl.this.loadEventos();
+			}
+		});
+		btnRefresh.setBounds(163, 386, 105, 23);
+		this.frame.getContentPane().add(btnRefresh);
+
+		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainScreenViewImpl.this.deletarSelecionado();
+			}
+		});
+		btnDeletar.setBounds(29, 386, 105, 23);
+		this.frame.getContentPane().add(btnDeletar);
 		this.frame.setVisible(true);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.frame.setBounds(100, 100, 450, 461);
+	}
+
+	protected void deletarSelecionado() {
+		int deletar = this.table.getSelectedRow();
+		this.presenter.deletar(deletar);
+		this.dtm.removeRow(deletar);
 	}
 
 	private void loadEventos() {
@@ -81,11 +95,15 @@ public class MainScreenViewImpl implements MainScreenView {
 	}
 
 	private void renderEventos() {
+		if (this.dtm.getRowCount() > 0) {
+			for (int i = this.dtm.getRowCount() - 1; i > -1; i--) {
+				this.dtm.removeRow(i);
+			}
+		}
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		for (Evento e : this.eventos) {
 			this.dtm.addRow(new Object[] { e.getNome(), df.format(e.getDateInicio()), df.format(e.getDateFim()),
 					e.getDescricao() });
 		}
 	}
-
 }

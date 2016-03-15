@@ -44,4 +44,14 @@ public class MainScreenModelImpl implements MainScreenModel {
 		return eventos;
 	}
 
+	@Override
+	public void deletarEvento(int deletar) throws SQLException {
+		this.conn = this.db.getConnection();
+		Statement st = this.conn.createStatement();
+		deletar = deletar + 1;
+		this.query = "DELETE FROM calendario WHERE idcalendario = " + deletar + ";";
+		System.out.println(this.query);
+		st.executeUpdate(this.query);
+	}
+
 }

@@ -49,4 +49,14 @@ public class MainScreenPresenterImpl implements MainScreenPresenter {
 		this.cpf = cpf;
 	}
 
+	@Override
+	public void deletar(int deletar) {
+		try {
+			this.cadastroModel.deletarEvento(deletar);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
