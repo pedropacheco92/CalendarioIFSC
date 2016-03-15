@@ -36,6 +36,7 @@ public class NovoEventoModelImpl implements NovoEventoModel {
 		System.out.println(this.query);
 		st.executeUpdate(this.query);
 		st.close();
+		rs.close();
 	}
 
 	private String geraValue(String s) {

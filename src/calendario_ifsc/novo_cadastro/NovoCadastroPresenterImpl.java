@@ -1,10 +1,12 @@
 package calendario_ifsc.novo_cadastro;
 
 import java.awt.Component;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import calendario_ifsc.constants.NovoCadastroConstants;
 import calendario_ifsc.form.NovoCadastroFormValidator;
+import calendario_ifsc.utils.Usuario;
 
 public class NovoCadastroPresenterImpl implements NovoCadastroPresenter {
 
@@ -20,11 +22,19 @@ public class NovoCadastroPresenterImpl implements NovoCadastroPresenter {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void cadastrar() {
+	public void cadastrar(Usuario usuario) {
 		this.listaCampos = this.view.getListaCampos();
-		this.formValidator = new NovoCadastroFormValidator(this.listaCampos);
-		this.formValidator.validateForm();
+		// this.formValidator = new NovoCadastroFormValidator(this.listaCampos);
+		// this.formValidator.validateForm();
+
+		try {
+			this.model.salvarUsuario(usuario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -3,17 +3,20 @@ package calendario_ifsc.novo_cadastro;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import calendario_ifsc.constants.NovoCadastroConstants;
+import calendario_ifsc.utils.Usuario;
 
 public class NovoCadastroViewImpl implements NovoCadastroView {
 
@@ -138,7 +141,30 @@ public class NovoCadastroViewImpl implements NovoCadastroView {
 		btnCadasterse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				NovoCadastroViewImpl.this.presenter.cadastrar();
+				if (NovoCadastroViewImpl.this.verificaVazio()) {
+					JOptionPane.showMessageDialog(NovoCadastroViewImpl.this.frame, "Campos Vazios!");
+				} else {
+					if (!Arrays.equals(NovoCadastroViewImpl.this.passwordField.getPassword(),
+							NovoCadastroViewImpl.this.passwordFieldConfirma.getPassword())) {
+						JOptionPane.showMessageDialog(NovoCadastroViewImpl.this.frame, "Senhas diferentes!");
+					} else {
+						if (!NovoCadastroViewImpl.this.textFieldConfirmaLogin.getText()
+								.equals(NovoCadastroViewImpl.this.textFieldLogin.getText())) {
+							JOptionPane.showMessageDialog(NovoCadastroViewImpl.this.frame, "Logins diferentes!");
+						} else {
+							Usuario u = new Usuario();
+							u.setCpf(NovoCadastroViewImpl.this.textFieldCPF.getText());
+							u.setEmail(NovoCadastroViewImpl.this.textFieldLogin.getText());
+							u.setMatricula(NovoCadastroViewImpl.this.textFieldMatricula.getText());
+							u.setNome(NovoCadastroViewImpl.this.textFieldNome.getText());
+							u.setSenha(new String(NovoCadastroViewImpl.this.passwordField.getPassword()));
+
+							NovoCadastroViewImpl.this.presenter.cadastrar(u);
+							NovoCadastroViewImpl.this.frame.dispose();
+						}
+					}
+				}
+
 			}
 		});
 		btnCadasterse.setBounds(242, 370, 120, 40);
@@ -153,6 +179,19 @@ public class NovoCadastroViewImpl implements NovoCadastroView {
 		});
 		btnVoltar.setBounds(73, 370, 120, 40);
 		this.frame.getContentPane().add(btnVoltar);
+	}
+
+	protected boolean verificaVazio() {
+		if (this.textFieldLogin == null || this.textFieldConfirmaLogin == null || this.textFieldNome == null
+				|| this.textFieldCPF == null || this.passwordField == null || this.passwordFieldConfirma == null
+				|| this.textFieldMatricula == null || this.textFieldLogin.getText() == ""
+				|| this.textFieldConfirmaLogin.getText() == "" || this.textFieldNome.getText() == ""
+				|| this.textFieldCPF.getText() == "" || this.passwordField.getPassword().length == 0
+				|| this.passwordFieldConfirma.getPassword().length == 0 || this.textFieldMatricula.getText() == "") {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
