@@ -22,6 +22,9 @@ public class LoginModelImpl implements LoginModel {
 
 	@Override
 	public void loadUsuario(String login, String senha) throws Exception {
+		if (login == null || login == "" || senha == null || senha == ""){
+			throw new CampoVazioException();
+		}
 		this.conn = this.db.getConnection();
 		Statement st = this.conn.createStatement();
 		this.query = "SELECT * FROM usuario WHERE cpf = '" + login + "'";
@@ -29,18 +32,22 @@ public class LoginModelImpl implements LoginModel {
 		System.out.println(this.query);
 		ResultSet rs = st.executeQuery(this.query);
 		boolean senhaOk = false;
-		while (rs.next()) {
-			senhaOk = this.checkPassword(senha, rs.getString(4));
+		
+		if (!rs.next()) {
+			rs.close();
+			st.close();
+		//	throw new UsuarioNotFoundException();
+		} else {
+			while (rs.next()) {
+				senhaOk = this.checkPassword(senha, rs.getString(4));
+			}
 		}
 		rs.close();
 		st.close();
 
-		if (senhaOk) {
-			System.out.println("deu boa");
-		} else {
-			System.out.println("deu ruim");
-		}
-
+		if (!senhaOk) {
+		//	throw new SenhaIncorretaException();
+		} 
 	}
 
 	private String hashPassword(String password_plaintext) {
