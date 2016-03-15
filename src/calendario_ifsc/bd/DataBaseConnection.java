@@ -9,13 +9,14 @@ public class DataBaseConnection {
 
 	private static final String USER = "postgres";
 	private static final String PASS = "root";
-	private static final String URL = "jdbc:postgresql://localhost/teste";
+	private static final String URL = "jdbc:postgresql://localhost/CALENDARIO_IFSC";
 
 	private Connection connection;
 
 	public DataBaseConnection() {
 		try {
 			this.connect();
+			System.out.println("Conectou ao banco");
 		} catch (SQLException e) {
 			System.out.println("Erro ao conectar no banco: " + e.getMessage());
 		} catch (Exception e) {

@@ -113,8 +113,7 @@ public class LoginViewImpl<PRESENTER> implements LoginView<PRESENTER> {
 	protected void fazerLoginUsuario() {
 		this.frame.dispose();
 		try {
-			this.presenter.validateLogin(this.textField.getText().trim(),
-					this.passwordField.getPassword().toString().trim());
+			this.presenter.validateLogin(this.textField.getText().trim(), new String(this.passwordField.getPassword()));
 		} catch (Exception e) {
 
 		}
