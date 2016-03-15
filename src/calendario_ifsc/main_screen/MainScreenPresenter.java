@@ -12,5 +12,5 @@ public interface MainScreenPresenter {
 
 	void setCpf(String cpf);
 
-	void deletar(int deletar);
+	void deletar(String nome, String dataInicio, String dataFim, String descricao);
 }

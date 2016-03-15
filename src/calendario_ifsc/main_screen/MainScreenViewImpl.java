@@ -85,7 +85,11 @@ public class MainScreenViewImpl implements MainScreenView {
 
 	protected void deletarSelecionado() {
 		int deletar = this.table.getSelectedRow();
-		this.presenter.deletar(deletar);
+		String nome = (String) this.table.getValueAt(deletar, 0);
+		String dataInicio = (String) this.table.getValueAt(deletar, 1);
+		String dataFim = (String) this.table.getValueAt(deletar, 2);
+		String descricao = (String) this.table.getValueAt(deletar, 3);
+		this.presenter.deletar(nome, dataInicio, dataFim, descricao);
 		this.dtm.removeRow(deletar);
 	}
 

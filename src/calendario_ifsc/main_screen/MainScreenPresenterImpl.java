@@ -50,9 +50,9 @@ public class MainScreenPresenterImpl implements MainScreenPresenter {
 	}
 
 	@Override
-	public void deletar(int deletar) {
+	public void deletar(String nome, String dataInicio, String dataFim, String descricao) {
 		try {
-			this.cadastroModel.deletarEvento(deletar);
+			this.cadastroModel.deletarEvento(nome, dataInicio, dataFim, descricao, this.cpf);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

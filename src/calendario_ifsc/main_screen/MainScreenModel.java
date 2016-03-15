@@ -9,6 +9,7 @@ public interface MainScreenModel {
 
 	List<Evento> loadEventos(String cpf) throws SQLException;
 
-	void deletarEvento(int deletar) throws SQLException;
+	void deletarEvento(String nome, String dataInicio, String dataFim, String descricao, String cpf)
+			throws SQLException;
 
 }
